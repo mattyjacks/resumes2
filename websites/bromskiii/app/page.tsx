@@ -116,18 +116,6 @@ export default function Home() {
     }
   }, [isAnimating]);
 
-  const getAnimationClasses = () => {
-    if (!isAnimating) return '';
-    
-    switch (animationStyle) {
-      case 'magical': return 'magical-chaos';
-      case 'fire': return 'fire-explosion';
-      case 'water': return 'water-flow';
-      case 'matrix': return 'matrix-rain';
-      case 'cosmic': return 'cosmic-drift';
-      default: return '';
-    }
-  };
 
   const getParticleClasses = (particle: {id: number, x: number, y: number, type?: string}) => {
     const baseClasses = "fixed z-40 pointer-events-none";
@@ -314,12 +302,12 @@ export default function Home() {
             <div className={`transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
               <h3 className={`text-2xl font-semibold mb-6 text-purple-400 transition-all duration-1000 ${isAnimating ? 'animate-ping' : ''}`}>Professional Background</h3>
               <p className={`text-gray-300 mb-6 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>
-                Based in Canada, I'm a passionate cybersecurity professional with over 5 years of experience 
+                Based in Canada, I&apos;m a passionate cybersecurity professional with over 5 years of experience 
                 in ethical hacking and vulnerability research. My expertise spans web application security, 
                 blockchain auditing, and full-stack development.
               </p>
               <p className={`text-gray-300 mb-6 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
-                As a certified bug bounty hunter, I've successfully identified and reported critical 
+                As a certified bug bounty hunter, I&apos;ve successfully identified and reported critical 
                 vulnerabilities for major tech companies, earning recognition in their security halls of fame. 
                 My approach combines deep technical knowledge with creative problem-solving.
               </p>
@@ -421,9 +409,9 @@ export default function Home() {
       {/* Contact Section */}
       <section id="contact" className={`py-20 px-6 bg-black/20 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className={`text-4xl font-bold mb-8 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>Let's Connect</h2>
+          <h2 className={`text-4xl font-bold mb-8 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>Let&apos;s Connect</h2>
           <p className={`text-xl text-gray-300 mb-12 transition-all duration-1000 ${isAnimating ? 'animate-ping' : ''}`}>
-            Ready to secure your digital assets? Let's discuss your cybersecurity needs.
+            Ready to secure your digital assets? Let&apos;s discuss your cybersecurity needs.
           </p>
           
           <div className="flex justify-center gap-8 mb-12">
