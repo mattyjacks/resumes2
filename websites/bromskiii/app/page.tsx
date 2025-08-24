@@ -6,7 +6,8 @@ import { Shield, Bug, Code, Globe, ChevronRight, ExternalLink, Github, Linkedin,
 export default function Home() {
   const [currentProject, setCurrentProject] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [particles, setParticles] = useState<Array<{id: number, x: number, y: number}>>([]);
+  const [animationStyle, setAnimationStyle] = useState<'magical' | 'fire' | 'water' | 'matrix' | 'cosmic'>('magical');
+  const [particles, setParticles] = useState<Array<{id: number, x: number, y: number, type?: string}>>([]);
 
   const projects = [
     {
@@ -42,21 +43,69 @@ export default function Home() {
     { icon: Globe, name: "Web3 & Blockchain", level: 85 }
   ];
 
+  const animationStyles = ['magical', 'fire', 'water', 'matrix', 'cosmic'] as const;
+
   const handleMagicalAnimation = () => {
-    setIsAnimating(!isAnimating);
+    if (isAnimating) return; // Prevent multiple animations
     
-    // Create magical particles
-    const newParticles = Array.from({ length: 50 }, (_, i) => ({
-      id: i,
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight
-    }));
+    // Randomly select animation style
+    const randomStyle = animationStyles[Math.floor(Math.random() * animationStyles.length)];
+    setAnimationStyle(randomStyle);
+    setIsAnimating(true);
+    
+    // Create particles based on animation style
+    let newParticles: Array<{id: number, x: number, y: number, type?: string}> = [];
+    
+    switch (randomStyle) {
+      case 'magical':
+        newParticles = Array.from({ length: 50 }, (_, i) => ({
+          id: i,
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          type: 'sparkle'
+        }));
+        break;
+      case 'fire':
+        newParticles = Array.from({ length: 80 }, (_, i) => ({
+          id: i,
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          type: 'flame'
+        }));
+        break;
+      case 'water':
+        newParticles = Array.from({ length: 60 }, (_, i) => ({
+          id: i,
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          type: 'droplet'
+        }));
+        break;
+      case 'matrix':
+        newParticles = Array.from({ length: 100 }, (_, i) => ({
+          id: i,
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          type: 'code'
+        }));
+        break;
+      case 'cosmic':
+        newParticles = Array.from({ length: 70 }, (_, i) => ({
+          id: i,
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          type: 'star'
+        }));
+        break;
+    }
+    
     setParticles(newParticles);
 
-    // Clear particles after animation
+    // Stop animation after 10 seconds and return smoothly
     setTimeout(() => {
+      setIsAnimating(false);
       setParticles([]);
-    }, 3000);
+    }, 10000);
   };
 
   useEffect(() => {
@@ -67,32 +116,94 @@ export default function Home() {
     }
   }, [isAnimating]);
 
+  const getAnimationClasses = () => {
+    if (!isAnimating) return '';
+    
+    switch (animationStyle) {
+      case 'magical': return 'magical-chaos';
+      case 'fire': return 'fire-explosion';
+      case 'water': return 'water-flow';
+      case 'matrix': return 'matrix-rain';
+      case 'cosmic': return 'cosmic-drift';
+      default: return '';
+    }
+  };
+
+  const getParticleClasses = (particle: {id: number, x: number, y: number, type?: string}) => {
+    const baseClasses = "fixed z-40 pointer-events-none";
+    
+    switch (particle.type) {
+      case 'sparkle':
+        return `${baseClasses} w-2 h-2 bg-yellow-300 rounded-full animate-ping`;
+      case 'flame':
+        return `${baseClasses} w-3 h-4 bg-gradient-to-t from-red-500 via-orange-400 to-yellow-300 rounded-full animate-bounce`;
+      case 'droplet':
+        return `${baseClasses} w-2 h-3 bg-gradient-to-b from-blue-300 to-blue-600 rounded-full animate-pulse`;
+      case 'code':
+        return `${baseClasses} w-1 h-4 bg-green-400 animate-pulse`;
+      case 'star':
+        return `${baseClasses} w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-ping`;
+      default:
+        return `${baseClasses} w-2 h-2 bg-yellow-300 rounded-full animate-ping`;
+    }
+  };
+
   return (
-    <main className={`min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden ${isAnimating ? 'magical-chaos' : ''}`}>
-      {/* Magical Particles */}
+    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
+      {/* Dynamic Particles */}
       {particles.map((particle) => (
         <div
           key={particle.id}
-          className="fixed w-2 h-2 bg-yellow-300 rounded-full animate-ping z-40 pointer-events-none"
+          className={getParticleClasses(particle)}
           style={{
             left: particle.x,
             top: particle.y,
             animationDelay: `${Math.random() * 2}s`,
-            animationDuration: `${1 + Math.random() * 2}s`
+            animationDuration: `${1 + Math.random() * 3}s`
           }}
-        />
+        >
+          {particle.type === 'code' && (
+            <span className="text-xs text-green-400 font-mono">
+              {['0', '1', '{', '}', '<', '>', '/', '*'][Math.floor(Math.random() * 8)]}
+            </span>
+          )}
+        </div>
       ))}
 
       {/* Navigation */}
-      <nav className={`fixed top-0 w-full bg-black/20 backdrop-blur-md border-b border-purple-500/20 z-50 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>
+      <nav className={`fixed top-0 w-full bg-black/20 backdrop-blur-md border-b border-purple-500/20 z-50 transition-all duration-1000 ${
+        isAnimating ? (
+          animationStyle === 'magical' ? 'animate-bounce' :
+          animationStyle === 'fire' ? 'animate-pulse' :
+          animationStyle === 'water' ? 'animate-bounce' :
+          animationStyle === 'matrix' ? 'animate-pulse' :
+          'animate-spin'
+        ) : ''
+      }`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className={`flex items-center gap-2 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`}>
+          <div className={`flex items-center gap-2 transition-all duration-1000 ${
+            isAnimating ? (
+              animationStyle === 'magical' ? 'animate-spin' :
+              animationStyle === 'fire' ? 'animate-bounce' :
+              animationStyle === 'water' ? 'animate-pulse' :
+              animationStyle === 'matrix' ? 'animate-bounce' :
+              'animate-spin'
+            ) : ''
+          }`}>
             <Shield className="w-8 h-8 text-purple-400" />
             <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
               Bromskiii
             </span>
           </div>
-          <div className={`flex items-center gap-6 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
+          <div className={`flex items-center gap-6 transition-all duration-1000 ${
+            isAnimating ? (
+              animationStyle === 'magical' ? 'animate-pulse' :
+              animationStyle === 'fire' ? 'animate-spin' :
+              animationStyle === 'water' ? 'animate-bounce' :
+              animationStyle === 'matrix' ? 'animate-pulse' :
+              'animate-bounce'
+            ) : ''
+          }`}>
             <a href="#about" className="hover:text-purple-400 transition-colors">About</a>
             <a href="#projects" className="hover:text-purple-400 transition-colors">Projects</a>
             <a href="#contact" className="hover:text-purple-400 transition-colors">Contact</a>
@@ -116,21 +227,54 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="flex justify-center gap-4 mb-12">
-            <button className={`bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-500 ${isAnimating ? 'animate-spin' : ''}`}>
+          <div className="flex justify-center gap-4 mb-8">
+            <button className={`bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-500 ${
+              isAnimating ? (
+                animationStyle === 'magical' ? 'animate-spin' :
+                animationStyle === 'fire' ? 'animate-bounce' :
+                animationStyle === 'water' ? 'animate-pulse' :
+                animationStyle === 'matrix' ? 'animate-bounce' :
+                'animate-spin'
+              ) : ''
+            }`}>
               View Projects
             </button>
-            <button className={`border border-purple-400 px-8 py-3 rounded-lg font-semibold hover:bg-purple-400/10 transition-all duration-500 ${isAnimating ? 'animate-bounce' : ''}`}>
+            <button className={`border border-purple-400 px-8 py-3 rounded-lg font-semibold hover:bg-purple-400/10 transition-all duration-500 ${
+              isAnimating ? (
+                animationStyle === 'magical' ? 'animate-bounce' :
+                animationStyle === 'fire' ? 'animate-pulse' :
+                animationStyle === 'water' ? 'animate-bounce' :
+                animationStyle === 'matrix' ? 'animate-pulse' :
+                'animate-bounce'
+              ) : ''
+            }`}>
               Download CV
             </button>
+          </div>
+
+          {/* Animate Button - Own Row */}
+          <div className="flex justify-center mb-12">
             <button 
               onClick={handleMagicalAnimation}
-              className={`bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 px-8 py-3 rounded-lg font-bold text-black shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-110 ${isAnimating ? 'animate-pulse bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500' : ''}`}
+              disabled={isAnimating}
+              className={`px-16 py-6 rounded-2xl text-xl font-bold text-black shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110 ${
+                isAnimating 
+                  ? `animate-pulse ${
+                      animationStyle === 'magical' ? 'bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500' :
+                      animationStyle === 'fire' ? 'bg-gradient-to-r from-red-600 via-orange-600 to-yellow-500' :
+                      animationStyle === 'water' ? 'bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400' :
+                      animationStyle === 'matrix' ? 'bg-gradient-to-r from-green-600 via-lime-500 to-emerald-400' :
+                      'bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-500'
+                    }`
+                  : 'bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500'
+              } ${isAnimating ? 'cursor-not-allowed opacity-75' : 'cursor-pointer'}`}
             >
-              <div className="flex items-center gap-2">
-                <Sparkles className={`w-5 h-5 ${isAnimating ? 'animate-spin' : ''}`} />
-                ANIMATE!!!
-                <Sparkles className={`w-5 h-5 ${isAnimating ? 'animate-spin' : ''}`} />
+              <div className="flex items-center gap-4">
+                <Sparkles className={`w-8 h-8 ${isAnimating ? 'animate-spin' : ''}`} />
+                <span className="text-2xl">
+                  {isAnimating ? `${animationStyle.toUpperCase()}ING...` : 'ANIMATE!!!'}
+                </span>
+                <Sparkles className={`w-8 h-8 ${isAnimating ? 'animate-spin' : ''}`} />
               </div>
             </button>
           </div>
@@ -307,24 +451,16 @@ export default function Home() {
       </footer>
 
       <style jsx global>{`
-        @keyframes magical-float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          25% { transform: translateY(-20px) rotate(5deg); }
-          50% { transform: translateY(-10px) rotate(-5deg); }
-          75% { transform: translateY(-15px) rotate(3deg); }
+        /* Remove global body animations - animate only individual elements */
+        
+        /* Smooth transitions for individual elements only */
+        .transition-all {
+          transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
         
-        @keyframes sparkle {
-          0%, 100% { opacity: 0; transform: scale(0); }
-          50% { opacity: 1; transform: scale(1); }
-        }
-        
-        .magical-chaos {
-          animation: magical-float 3s ease-in-out infinite;
-        }
-        
-        .magical-chaos * {
-          animation-duration: ${Math.random() * 2 + 1}s !important;
+        /* Enhanced button hover effects */
+        .hover\\:shadow-3xl:hover {
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 30px rgba(255, 255, 255, 0.1);
         }
       `}</style>
     </main>
