@@ -1,12 +1,12 @@
 // Julienne Panganiban Resume - Interactive JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Philippines flag colors for dynamic effects
+    // Warm & Neutral palette for dynamic effects
     const flagColors = {
-        blue: '#0038a8',
-        red: '#ce1126',
-        yellow: '#fcd116',
-        white: '#ffffff'
+        blue: '#b4413e',   // deep warm red (repurposing key) 
+        red: '#e1645e',    // coral red
+        yellow: '#d9c0a3', // sand tan
+        white: '#f3e7d8'   // soft beige
     };
 
     // Respect user motion preferences
@@ -217,13 +217,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
 
-                fill.style.transition = 'width 1.8s ease-out';
+                // Slow down the fill animation significantly
+                fill.style.transition = 'width 5.5s ease-out';
                 requestAnimationFrame(() => {
                     fill.style.width = target + '%';
                 });
 
                 // Count up percent label
-                const duration = 1500;
+                const duration = 6000; // slower counter
                 const start = performance.now();
                 function step(now) {
                     const progress = Math.min((now - start) / duration, 1);
@@ -314,7 +315,7 @@ document.addEventListener('DOMContentLoaded', function() {
             title.addEventListener('mouseenter', () => {
                 if (!prefersReducedMotion) {
                     title.style.animation = 'wiggle 0.6s ease';
-                    title.style.boxShadow = '0 10px 24px rgba(206,17,38,0.25)';
+                    title.style.boxShadow = '0 10px 24px rgba(180,65,62,0.25)';
                     const rect = title.getBoundingClientRect();
                     burstConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2, 60);
                 }
@@ -329,15 +330,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Console message with Philippines flag
     console.log(`
-    🇵🇭 Welcome to Julienne Panganiban's Resume! 🇵🇭
+    Welcome to Julienne Panganiban's Resume!
     
-    Built with Philippines flag colors:
-    🔵 Blue: #0038a8
-    🔴 Red: #ce1126  
-    🟡 Yellow: #fcd116
-    ⚪ White: #ffffff
+    Built with a warm & neutral palette:
+    Deep warm red: #b4413e
+    Coral red: #e1645e  
+    Sand tan: #d9c0a3
+    Soft beige: #f3e7d8
     
-    Mabuhay! 🎉
+    ✨
     `);
 });
 

@@ -1,17 +1,57 @@
-/* Philippines Flag Colors */
+/* Warm & Neutral Palette (remapped onto existing variables) */
 :root {
-    --flag-blue: #0038a8;
-    --flag-red: #ce1126;
-    --flag-yellow: #fcd116;
-    --flag-white: #ffffff;
-    --dark-blue: #002a7a;
-    --light-blue: #1a4fb8;
-    --dark-red: #a50e20;
-    --light-red: #e31436;
-    --text-dark: #2c3e50;
-    --text-light: #ecf0f1;
+    /* Reuse existing variable names but map them to warm/neutral tones */
+    --flag-blue: #b4413e;   /* deep warm red */
+    --flag-red: #e1645e;    /* coral red */
+    --flag-yellow: #d9c0a3; /* sand tan */
+    --flag-white: #f3e7d8;  /* soft beige */
+    --dark-blue: #8f3936;   /* deeper red for shadows */
+    --light-blue: #cf7a72;  /* lighter coral */
+    --dark-red: #8f3936;
+    --light-red: #e67f79;
+    --text-dark: #2b2b2b;
+    --text-light: #fffaf2;
     --shadow: rgba(0, 0, 0, 0.1);
 }
+
+/* WhatsApp buttons */
+.wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #25D366; /* WhatsApp green */
+    color: #ffffff;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 6px 18px rgba(37,211,102,0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.wa-btn i { font-size: 1.1rem; }
+.wa-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(37,211,102,0.45); }
+.wa-btn:active { transform: translateY(0); }
+
+.wa-btn-footer { margin: 10px 0; }
+
+.wa-float {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #25D366;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 24px rgba(37,211,102,0.45);
+    z-index: 1000;
+    text-decoration: none;
+}
+.wa-float i { font-size: 28px; }
+.wa-float:hover { filter: brightness(1.08); }
 
 * {
     margin: 0;
@@ -23,7 +63,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
-    background: linear-gradient(135deg, var(--flag-white) 0%, #f8f9fa 100%);
+    background: linear-gradient(135deg, var(--flag-white) 0%, #fffdf9 100%);
     overflow-x: hidden;
 }
 
@@ -35,7 +75,7 @@ body {
 
 /* Header Styles */
 .header {
-    background: linear-gradient(135deg, #2f3e52 0%, #1f2a3a 100%);
+    background: linear-gradient(135deg, var(--flag-blue) 0%, var(--dark-blue) 100%);
     color: var(--flag-white);
     padding: 60px 0;
     position: relative;
@@ -61,10 +101,10 @@ body {
 /* Festive bunting (ribbon stripes with gentle sway) */
 .festive-bunting {
     position: absolute;
-    top: 0;
+    top: -24px; /* extend beyond top so it never peeks */
     left: 0;
     width: 100%;
-    height: 70px;
+    height: 98px; /* taller to fully cover while swaying */
     background: repeating-linear-gradient(90deg,
         var(--flag-blue) 0 80px,
         var(--flag-yellow) 80px 160px,
@@ -114,10 +154,14 @@ body {
     }
 }
 
-.profile-image {
-    font-size: 120px;
-    color: var(--flag-yellow);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+.profile-image img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid var(--flag-yellow);
+    box-shadow: 0 10px 24px var(--shadow);
+    background: #fff;
 }
 
 @keyframes pulse {
@@ -137,7 +181,8 @@ body {
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: var(--text-light);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 @keyframes typewriter {
@@ -198,7 +243,7 @@ body {
 }
 
 .section-title {
-    background: linear-gradient(135deg, #3a475a 0%, #2f3e52 100%);
+    background: linear-gradient(135deg, var(--flag-blue) 0%, var(--light-blue) 100%);
     color: var(--flag-white);
     padding: 20px 30px;
     font-size: 1.5rem;
@@ -206,7 +251,7 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
-    border-bottom: 4px solid #d9be4f;
+    border-bottom: 4px solid var(--flag-yellow);
 }
 
 .section-title i {
@@ -221,9 +266,9 @@ body {
 .experience-item {
     margin-bottom: 30px;
     padding: 25px;
-    background: linear-gradient(135deg, #f8f9fa 0%, var(--flag-white) 100%);
+    background: linear-gradient(135deg, #fcfbf8 0%, var(--flag-white) 100%);
     border-radius: 10px;
-    border-left: 5px solid #b8c4d6;
+    border-left: 5px solid #d9c9ba;
     transition: all 0.3s ease;
     position: relative;
 }
@@ -231,7 +276,7 @@ body {
 .experience-item:hover {
     transform: translateX(10px);
     box-shadow: 0 5px 20px var(--shadow);
-    border-left-color: #d9be4f;
+    border-left-color: var(--flag-yellow);
 }
 
 .experience-item::before {
@@ -241,7 +286,7 @@ body {
     top: 0;
     bottom: 0;
     width: 5px;
-    background: linear-gradient(to bottom, #b8c4d6, #d9be4f);
+    background: linear-gradient(to bottom, #d9c9ba, var(--flag-yellow));
     transition: all 0.3s ease;
 }
 
@@ -391,8 +436,8 @@ body {
     top: 0;
     background: linear-gradient(90deg, var(--flag-blue), var(--flag-yellow), var(--flag-red));
     background-size: 200% 100%;
-    animation: stripeMove 2.2s linear infinite, progressGlow 1.4s ease-in-out infinite alternate;
-    box-shadow: 0 0 12px rgba(252, 209, 22, 0.35);
+    animation: stripeMove 6s linear infinite, progressGlow 2.6s ease-in-out infinite alternate; /* slower */
+    box-shadow: 0 0 12px rgba(217, 192, 163, 0.5);
 }
 
 @keyframes stripeMove {
@@ -409,7 +454,7 @@ body {
 .education-item {
     margin-bottom: 20px;
     padding: 20px;
-    background: linear-gradient(135deg, #f8f9fa 0%, var(--flag-white) 100%);
+    background: linear-gradient(135deg, #fcfbf8 0%, var(--flag-white) 100%);
     border-radius: 10px;
     border-top: 4px solid var(--flag-blue);
 }
@@ -431,7 +476,7 @@ body {
     gap: 10px;
     margin-top: 20px;
     padding: 15px;
-    background: linear-gradient(135deg, var(--flag-yellow) 0%, #ffd700 100%);
+    background: linear-gradient(135deg, var(--flag-yellow) 0%, #ead7b8 100%);
     border-radius: 10px;
     color: var(--text-dark);
     font-weight: 600;
@@ -454,9 +499,9 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    background: linear-gradient(135deg, #f8f9fa 0%, var(--flag-white) 100%);
+    background: linear-gradient(135deg, #fcfbf8 0%, var(--flag-white) 100%);
     border-radius: 10px;
-    border-left: 4px solid #cfd6e3;
+    border-left: 4px solid #e2d6c8;
 }
 
 .language {
@@ -490,9 +535,9 @@ body {
 
 .reference-item {
     padding: 20px;
-    background: linear-gradient(135deg, #f8f9fa 0%, var(--flag-white) 100%);
+    background: linear-gradient(135deg, #fcfbf8 0%, var(--flag-white) 100%);
     border-radius: 10px;
-    border-top: 4px solid #cfd6e3;
+    border-top: 4px solid #e2d6c8;
     text-align: center;
     transition: all 0.3s ease;
 }
@@ -520,7 +565,7 @@ body {
 
 /* Footer */
 .footer {
-    background: linear-gradient(135deg, #2f3e52 0%, #1f2a3a 100%);
+    background: linear-gradient(135deg, var(--dark-blue) 0%, var(--flag-blue) 100%);
     color: var(--flag-white);
     padding: 40px 0;
     text-align: center;
@@ -542,6 +587,33 @@ body {
         var(--flag-red) 66%);
     transform: skew(20deg);
     opacity: 0.3;
+}
+
+/* Profile photos in content */
+.profile-detail-media {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 18px;
+}
+
+.profile-photo-medium {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 18px;
+    border: 6px solid var(--flag-white);
+    box-shadow: 0 10px 24px var(--shadow);
+}
+
+.profile-photo-small {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--flag-yellow);
+    box-shadow: 0 4px 12px var(--shadow);
+    display: block;
+    margin: 0 auto 10px;
 }
 
 /* Fullscreen confetti canvas */
