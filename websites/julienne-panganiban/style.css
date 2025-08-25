@@ -14,6 +14,29 @@
     --shadow: rgba(0, 0, 0, 0.1);
 }
 
+/* External footer promo */
+.footer-external {
+    margin: 18px auto 8px;
+    max-width: 840px;
+}
+.footer-external .pitch {
+    color: var(--flag-white);
+    opacity: 0.95;
+    margin-bottom: 10px;
+}
+.ext-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--flag-yellow), #ebd6b9);
+    color: #2b2b2b;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(233, 211, 181, 0.28);
+}
+.ext-btn:hover { filter: brightness(1.04); }
+.credit { color: var(--flag-white); opacity: 0.9; margin-top: 8px; }
+
 /* WhatsApp buttons */
 .wa-btn {
     display: inline-flex;
