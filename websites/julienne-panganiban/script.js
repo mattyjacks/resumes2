@@ -1,12 +1,6 @@
 // Julienne Panganiban Resume - Interactive JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize animations and interactions
-    initScrollAnimations();
-    initSkillTagAnimations();
-    initContactAnimations();
-    initLoadingAnimations();
-    
     // Philippines flag colors for dynamic effects
     const flagColors = {
         blue: '#0038a8',
@@ -14,6 +8,19 @@ document.addEventListener('DOMContentLoaded', function() {
         yellow: '#fcd116',
         white: '#ffffff'
     };
+
+    // Respect user motion preferences
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Initialize animations and interactions
+    // initScrollAnimations removed to eliminate pop-in effects
+    initSkillTagAnimations();
+    initContactAnimations();
+    // initLoadingAnimations removed to prevent load pop-ins
+    initProgressBars();
+    initConfetti();
+    initFestiveTitleEffects();
+    // Removed name glow for header stability
 
     // Scroll-triggered animations
     function initScrollAnimations() {
@@ -38,10 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }, observerOptions);
 
-        // Observe all sections
-        document.querySelectorAll('.section').forEach(section => {
-            observer.observe(section);
-        });
+        // Disabled: no scroll-triggered animations
     }
 
     // Skill tag interactions
@@ -49,28 +53,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const skillTags = document.querySelectorAll('.skill-tag');
         
         skillTags.forEach(tag => {
-            tag.addEventListener('mouseenter', function() {
-                // Random color animation from flag colors
-                const colors = [flagColors.blue, flagColors.red];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                this.style.background = `linear-gradient(135deg, ${randomColor}, ${randomColor}dd)`;
-                
-                // Add bounce effect
-                this.style.transform = 'translateY(-5px) scale(1.05)';
-            });
-            
-            tag.addEventListener('mouseleave', function() {
-                // Reset to original blue
-                this.style.background = `linear-gradient(135deg, ${flagColors.blue}, #1a4fb8)`;
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-            
-            // Click effect
+            // Keep CSS-driven hover only; add subtle click pulse + optional confetti
             tag.addEventListener('click', function() {
                 this.style.animation = 'pulse 0.6s ease-out';
-                setTimeout(() => {
-                    this.style.animation = '';
-                }, 600);
+                setTimeout(() => { this.style.animation = ''; }, 600);
+
+                if (!prefersReducedMotion) {
+                    const rect = this.getBoundingClientRect();
+                    burstConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2, 80);
+                }
             });
         });
     }
@@ -101,48 +92,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Loading animations
-    function initLoadingAnimations() {
-        // Animate elements on page load
-        setTimeout(() => {
-            document.body.classList.add('loading');
-        }, 100);
-        
-        // Stagger section animations
-        const sections = document.querySelectorAll('.section');
-        sections.forEach((section, index) => {
-            setTimeout(() => {
-                section.style.animation = `slideUp 0.8s ease-out forwards`;
-            }, index * 200);
-        });
-    }
+    // initLoadingAnimations removed
 
-    // Experience item hover effects
-    const experienceItems = document.querySelectorAll('.experience-item');
-    experienceItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.background = `linear-gradient(135deg, ${flagColors.white}, #f0f8ff)`;
-            this.style.borderLeftColor = flagColors.yellow;
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            this.style.background = 'linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%)';
-            this.style.borderLeftColor = flagColors.blue;
-        });
-    });
+    // Experience item hover effects handled purely by CSS for subtlety
 
-    // Reference item interactions
-    const referenceItems = document.querySelectorAll('.reference-item');
-    referenceItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.borderTopColor = flagColors.yellow;
-            this.style.background = `linear-gradient(135deg, ${flagColors.white}, #fff8dc)`;
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            this.style.borderTopColor = flagColors.red;
-            this.style.background = 'linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%)';
-        });
-    });
+    // Reference item hover effects handled by CSS only
 
     // Language proficiency animations
     const proficiencyBadges = document.querySelectorAll('.proficiency');
@@ -175,14 +129,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const profileText = document.querySelector('.profile-detail p');
         if (profileText) {
             const text = profileText.textContent;
+            if (prefersReducedMotion) {
+                // Show full text without typing animation
+                profileText.textContent = text;
+                profileText.style.borderRight = 'none';
+                return;
+            }
+
             profileText.textContent = '';
             profileText.style.borderRight = '2px solid ' + flagColors.blue;
-            
+
             let index = 0;
             const timer = setInterval(() => {
                 profileText.textContent += text.charAt(index);
                 index++;
-                
+
                 if (index >= text.length) {
                     clearInterval(timer);
                     setTimeout(() => {
@@ -207,41 +168,164 @@ document.addEventListener('DOMContentLoaded', function() {
         profileObserver.observe(profileSection);
     }
 
-    // Smooth scrolling for any anchor links
+    // Smooth scrolling for any anchor links (respect reduced motion)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                const behavior = prefersReducedMotion ? 'auto' : 'smooth';
+                target.scrollIntoView({ behavior, block: 'start' });
             }
         });
     });
 
-    // Add floating animation to profile image
-    const profileImage = document.querySelector('.profile-image');
-    if (profileImage) {
-        setInterval(() => {
-            profileImage.style.transform = 'translateY(-10px)';
-            setTimeout(() => {
-                profileImage.style.transform = 'translateY(0)';
-            }, 1000);
-        }, 3000);
-    }
+    // Floating profile image animation removed for header stability
 
-    // Add achievement badge pulse animation
+    // Optional: soften achievement pulse respecting reduced motion
     const achievement = document.querySelector('.achievement');
-    if (achievement) {
+    if (achievement && !prefersReducedMotion) {
         setInterval(() => {
             achievement.style.animation = 'pulse 1.5s ease-in-out';
             setTimeout(() => {
                 achievement.style.animation = '';
             }, 1500);
-        }, 5000);
+        }, 8000);
     }
+
+    // Confetti and progress bars and festive functions
+    let confettiCanvas, ctx, confettiParticles = [], confettiRAF;
+
+    // Initialize animated skill progress bars
+    function initProgressBars() {
+        const bars = document.querySelectorAll('.bar');
+        if (!bars.length) return;
+
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const bar = entry.target;
+                const fill = bar.querySelector('.bar-fill');
+                const percentLabel = bar.querySelector('.bar-percent');
+                const target = parseInt(fill.getAttribute('data-percent'), 10) || 0;
+
+                if (prefersReducedMotion) {
+                    fill.style.transition = 'none';
+                    fill.style.width = target + '%';
+                    percentLabel.textContent = target + '%';
+                    obs.unobserve(bar);
+                    return;
+                }
+
+                fill.style.transition = 'width 1.8s ease-out';
+                requestAnimationFrame(() => {
+                    fill.style.width = target + '%';
+                });
+
+                // Count up percent label
+                const duration = 1500;
+                const start = performance.now();
+                function step(now) {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const current = Math.floor(progress * target);
+                    percentLabel.textContent = current + '%';
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        const rect = bar.getBoundingClientRect();
+                        burstConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2, 100);
+                    }
+                }
+                requestAnimationFrame(step);
+
+                obs.unobserve(bar);
+            });
+        }, { threshold: 0.4 });
+
+        bars.forEach(b => observer.observe(b));
+    }
+
+    // Confetti system
+    function initConfetti() {
+        if (prefersReducedMotion) return;
+        confettiCanvas = document.getElementById('confetti-canvas');
+        if (!confettiCanvas) return;
+        ctx = confettiCanvas.getContext('2d');
+
+        function resize() {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        function loop() {
+            ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            for (let i = confettiParticles.length - 1; i >= 0; i--) {
+                const p = confettiParticles[i];
+                p.vy += 0.02;
+                p.x += p.vx;
+                p.y += p.vy;
+                p.rotation += p.spin;
+                p.life -= 0.01;
+                if (p.life <= 0 || p.y > confettiCanvas.height + 20) {
+                    confettiParticles.splice(i, 1);
+                    continue;
+                }
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rotation);
+                ctx.globalAlpha = Math.max(p.life, 0);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size * 0.6);
+                ctx.restore();
+            }
+            confettiRAF = requestAnimationFrame(loop);
+        }
+        loop();
+
+        // Periodic bursts removed to reduce distraction
+    }
+
+    function burstConfetti(x, y, count = 80) {
+        if (!ctx) return;
+        const colors = [flagColors.blue, flagColors.red, flagColors.yellow, flagColors.white];
+        for (let i = 0; i < count; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 2 + Math.random() * 4;
+            confettiParticles.push({
+                x: x,
+                y: y,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed - 2,
+                size: 6 + Math.random() * 6,
+                rotation: Math.random() * Math.PI,
+                spin: (Math.random() - 0.5) * 0.2,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                life: 0.9 + Math.random() * 0.6
+            });
+        }
+    }
+
+    // Section title festive hover
+    function initFestiveTitleEffects() {
+        const titles = document.querySelectorAll('.section-title');
+        titles.forEach(title => {
+            title.addEventListener('mouseenter', () => {
+                if (!prefersReducedMotion) {
+                    title.style.animation = 'wiggle 0.6s ease';
+                    title.style.boxShadow = '0 10px 24px rgba(206,17,38,0.25)';
+                    const rect = title.getBoundingClientRect();
+                    burstConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2, 60);
+                }
+            });
+            title.addEventListener('mouseleave', () => {
+                title.style.animation = '';
+                title.style.boxShadow = '';
+            });
+        });
+    }
+
 
     // Console message with Philippines flag
     console.log(`
@@ -288,6 +372,22 @@ style.textContent = `
     
     .contact-item, .skill-tag, .experience-item, .reference-item, .language-item, .proficiency {
         transition: all 0.3s ease;
+    }
+
+    @keyframes wiggle {
+        0%, 100% { transform: rotate(0deg); }
+        25% { transform: rotate(2deg); }
+        50% { transform: rotate(-2deg); }
+        75% { transform: rotate(1deg); }
+    }
+
+    .glow-name {
+        animation: glowPulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes glowPulse {
+        0%, 100% { text-shadow: 0 0 6px rgba(252,209,22,0.35), 0 0 12px rgba(0,56,168,0.25); }
+        50% { text-shadow: 0 0 10px rgba(252,209,22,0.6), 0 0 20px rgba(206,17,38,0.35); }
     }
 `;
 document.head.appendChild(style);
