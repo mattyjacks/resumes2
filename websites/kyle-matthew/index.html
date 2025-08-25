@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyle Matthew - Professional Resume</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <canvas id="bg-stars"></canvas>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <nav class="top-nav">
+                <a href="#education">Education</a>
+                <a href="#experience">Experience</a>
+                <a href="#certifications">Certifications</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="header-content">
+                <div class="profile-section">
+                    <div class="profile-image">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="profile-info">
+                        <h1 class="name">Kyle Matthew</h1>
+                        <p class="title">Accountant & Virtual Assistant</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Philippines</p>
+                    </div>
+                </div>
+                <div class="contact-section">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+639123456789" class="phone-link">+63 912 345 6789</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:kyle.matthew@email.com">kyle.matthew@email.com</a>
+                    </div>
+                    <div class="whatsapp-section">
+                        <button class="whatsapp-btn" onclick="openWhatsApp()">
+                            <i class="fab fa-whatsapp"></i>
+                            Message on WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flag-decoration"></div>
+    </header>
+
+    <!-- Animated Hero -->
+    <section class="hero-section reveal">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">🇵🇭 Proudly Filipino</div>
+                <h2 class="hero-title">My name is <span class="highlight">Kyle Matthew</span></h2>
+                <p class="hero-subtitle">I am from the Philippines.</p>
+                <div class="hero-cta">
+                    <a href="#experience" class="btn primary">View Experience</a>
+                    <button class="btn whatsapp" onclick="openWhatsApp()"><i class="fab fa-whatsapp"></i> Hire on WhatsApp</button>
+                </div>
+                <div class="hero-note">“I want to hire you, Kyle!” is pre-filled in WhatsApp.</div>
+            </div>
+            <!-- Flag Motifs -->
+            <div class="flag-motifs">
+                <div class="flag-triangle flag-triangle-blue parallax" data-speed="2"></div>
+                <div class="flag-triangle flag-triangle-red parallax" data-speed="-2"></div>
+                <div class="flag-sun parallax" data-speed="1"></div>
+                <div class="flag-star star-1 parallax" data-speed="1.5"></div>
+                <div class="flag-star star-2 parallax" data-speed="-1.5"></div>
+                <div class="flag-star star-3 parallax" data-speed="1"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Education Section -->
+            <section id="education" class="section education-section reveal">
+                <div class="section-header">
+                    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                </div>
+                <div class="section-content">
+                    <div class="education-item">
+                        <div class="institution">
+                            <h3>Our Lady of Fatima University – Valenzuela</h3>
+                            <p class="degree">Bachelor of Science in Accountancy</p>
+                            <p class="status">1 semester remaining</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Work Experience Section -->
+            <section id="experience" class="section experience-section reveal">
+                <div class="section-header">
+                    <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
+                </div>
+                <div class="section-content">
+                    <div class="experience-item tilt">
+                        <div class="company-info">
+                            <h3>Amazon – Virtual Assistant</h3>
+                            <p class="duration">Jun 2021 – Dec 2024 | via Upwork</p>
+                        </div>
+                        <div class="job-description">
+                            <ul>
+                                <li>Remote admin and bookkeeping support</li>
+                                <li>Report generation, coordination, and basic financial tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="experience-item tilt">
+                        <div class="company-info">
+                            <h3>TaskUs – Customer Service Representative</h3>
+                            <p class="duration">Jan 2021 – Apr 2021</p>
+                        </div>
+                        <div class="job-description">
+                            <ul>
+                                <li>Financial Account: Acorn</li>
+                                <li>Assisted users with account issues, ensuring data privacy compliance</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="experience-item tilt">
+                        <div class="company-info">
+                            <h3>Inspiro Relia – Customer Service Representative</h3>
+                            <p class="duration">Nov 2019 – May 2020</p>
+                        </div>
+                        <div class="job-description">
+                            <ul>
+                                <li>Handled seasonal e-commerce accounts (The Popcorn Factory, Cheryl's Cookies, 1-800-Flowers)</li>
+                                <li>Provided multichannel support (calls, emails, chat)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Certifications Section -->
+            <section id="certifications" class="section certifications-section reveal">
+                <div class="section-header">
+                    <h2><i class="fas fa-certificate"></i> Certifications</h2>
+                </div>
+                <div class="section-content">
+                    <div class="certifications-grid">
+                        <div class="cert-item tilt reveal">
+                            <i class="fas fa-award"></i>
+                            <h4>TESDA Bookkeeping NC III</h4>
+                        </div>
+                        <div class="cert-item tilt reveal">
+                            <i class="fas fa-award"></i>
+                            <h4>QuickBooks ProAdvisor</h4>
+                            <p>Intuit Certified</p>
+                        </div>
+                        <div class="cert-item tilt reveal">
+                            <i class="fas fa-award"></i>
+                            <h4>Microsoft Excel for Accountants</h4>
+                            <p>TESDA/Coursera</p>
+                        </div>
+                        <div class="cert-item tilt reveal">
+                            <i class="fas fa-award"></i>
+                            <h4>Accounting Info Systems Seminar</h4>
+                            <p>PICPA</p>
+                        </div>
+                        <div class="cert-item tilt reveal">
+                            <i class="fas fa-award"></i>
+                            <h4>Philippine Taxation Basics</h4>
+                            <p>BIR Accredited</p>
+                        </div>
+                        <div class="cert-item tilt reveal">
+                            <i class="fas fa-award"></i>
+                            <h4>Anti-Money Laundering</h4>
+                            <p>AMLC/PICPA</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="section skills-section reveal">
+                <div class="section-header">
+                    <h2><i class="fas fa-brain"></i> Skills</h2>
+                </div>
+                <div class="section-content">
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h3>Tools & Platforms</h3>
+                            <div class="skills-list">
+                                <span class="skill-tag tilt">QuickBooks</span>
+                                <span class="skill-tag tilt">Excel</span>
+                                <span class="skill-tag tilt">Google Workspace</span>
+                                <span class="skill-tag tilt">Trello</span>
+                                <span class="skill-tag tilt">Slack</span>
+                                <span class="skill-tag tilt">Zendesk</span>
+                                <span class="skill-tag tilt">Freshdesk</span>
+                                <span class="skill-tag tilt">Salesforce</span>
+                                <span class="skill-tag tilt">AI Prompting</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Soft Skills</h3>
+                            <div class="skills-list">
+                                <span class="skill-tag tilt">Communication</span>
+                                <span class="skill-tag tilt">Time Management</span>
+                                <span class="skill-tag tilt">Critical Thinking</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Kyle Matthew. Professional Resume</p>
+                <div class="philippines-pride">
+                    <i class="fas fa-heart"></i>
+                    <span>Made with pride in the Philippines</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
