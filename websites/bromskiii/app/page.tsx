@@ -11,12 +11,12 @@ export default function Home() {
 
   const projects = [
     {
-      title: "Coursify",
-      description: "Revolutionary Learning Platform",
-      details: "An innovative React-based course platform that transforms online education with interactive modules, real-time progress tracking, and adaptive learning algorithms. Built with modern web technologies for seamless user experience.",
+      title: "Coursify Web App",
+      description: "Full-Stack MERN Learning Platform",
+      details: "Built a complete MERN web application hosted on Azure (backend) and Vercel (frontend). Features modern dark-themed UI with React, secure JWT authentication, bcrypt password hashing, rate limiting for DDoS protection, and robust input validation.",
       url: "https://coursify-psi.vercel.app/",
-      tech: ["React", "TypeScript", "Tailwind CSS", "Node.js"],
-      category: "EdTech"
+      tech: ["React", "Node.js", "MongoDB", "Express", "JWT", "bcrypt", "Azure", "Vercel"],
+      category: "Full-Stack"
     },
     {
       title: "GiveHub",
@@ -33,14 +33,38 @@ export default function Home() {
       url: "https://etherium-wallet-rouge.vercel.app/",
       tech: ["React", "Ethereum", "Web3.js", "Cryptography", "Security"],
       category: "FinTech"
+    },
+    {
+      title: "Incident Response Simulation",
+      description: "Deloitte Security Analysis (Forage)",
+      details: "Performed comprehensive threat detection using CLI tools on log files. Documented findings following ISO 27001 frameworks, conducted post-incident root cause analysis, and provided security control recommendations for enterprise environments.",
+      url: "#",
+      tech: ["CLI Tools", "Log Analysis", "ISO 27001", "Threat Detection", "Documentation"],
+      category: "Security"
+    },
+    {
+      title: "SpiderBotX Robotics",
+      description: "Team Leadership & Engineering Design",
+      details: "Led a 4-member team designing a robotic walking mechanism using SolidWorks and Arduino. Achieved 50% motor usage reduction through gear optimization and mechanical redesign. Integrated breadboard solutions to overcome wiring limitations.",
+      url: "#",
+      tech: ["SolidWorks", "Arduino", "Mechanical Design", "Team Leadership", "Optimization"],
+      category: "Robotics"
+    },
+    {
+      title: "Bug Bounty Research",
+      description: "Offensive Security & Vulnerability Research",
+      details: "Successfully reported 2 vulnerabilities through Bugcrowd (OpenAI & others). Specialized in IDOR identification, XSS vectors, and privilege escalation flaws using manual testing and automated tools. Focused on ethical disclosure and program compliance.",
+      url: "#",
+      tech: ["Burp Suite", "OWASP ZAP", "FFUF", "Dirsearch", "Manual Testing", "Ethical Hacking"],
+      category: "Security Research"
     }
   ];
 
   const skills = [
     { icon: Shield, name: "Cybersecurity", level: 95 },
-    { icon: Bug, name: "Bug Bounty", level: 90 },
-    { icon: Code, name: "Full-Stack Dev", level: 88 },
-    { icon: Globe, name: "Web3 & Blockchain", level: 85 }
+    { icon: Bug, name: "Offensive Security", level: 90 },
+    { icon: Code, name: "Full-Stack Development", level: 88 },
+    { icon: Globe, name: "Cloud & SIEM", level: 85 }
   ];
 
   const animationStyles = ['magical', 'fire', 'water', 'matrix', 'cosmic'] as const;
@@ -180,7 +204,7 @@ export default function Home() {
           }`}>
             <Shield className="w-8 h-8 text-purple-400" />
             <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-              Bromskiii
+              Gurpratap Smagh
             </span>
           </div>
           <div className={`flex items-center gap-6 transition-all duration-1000 ${
@@ -205,13 +229,14 @@ export default function Home() {
           <div className={`mb-8 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>
             <h1 className={`text-6xl font-bold mb-6 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
               <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-                Cybersecurity Expert
+                Gurpratap Smagh
               </span>
             </h1>
             <p className={`text-xl text-gray-300 mb-8 max-w-3xl mx-auto transition-all duration-1000 ${isAnimating ? 'animate-ping' : ''}`}>
-              Canadian Bug Bounty Hunter & Computer Engineer specializing in web security, 
-              blockchain vulnerabilities, and full-stack development. Protecting digital assets 
-              through ethical hacking and innovative security solutions.
+              Motivated engineering student specializing in offensive ethical hacking and security research, 
+              with a talent for designing technical solutions and uncovering vulnerabilities. Eager to apply 
+              hands-on skills in penetration testing, secure systems design, and problem-solving to protect 
+              and enhance digital infrastructure.
             </p>
           </div>
           
@@ -302,44 +327,48 @@ export default function Home() {
             <div className={`transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
               <h3 className={`text-2xl font-semibold mb-6 text-purple-400 transition-all duration-1000 ${isAnimating ? 'animate-ping' : ''}`}>Professional Background</h3>
               <p className={`text-gray-300 mb-6 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>
-                Based in Canada, I&apos;m a passionate cybersecurity professional with over 5 years of experience 
-                in ethical hacking and vulnerability research. My expertise spans web application security, 
-                blockchain auditing, and full-stack development.
+                Currently pursuing Bachelor&apos;s of Engineering in Information Systems at University of Guelph-Humber 
+                with exceptional academic performance (Dean&apos;s Honorary List with 89.3% and 92.4% GPAs). 
+                Specialized in offensive ethical hacking, security research, and full-stack development.
               </p>
               <p className={`text-gray-300 mb-6 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
-                As a certified bug bounty hunter, I&apos;ve successfully identified and reported critical 
-                vulnerabilities for major tech companies, earning recognition in their security halls of fame. 
-                My approach combines deep technical knowledge with creative problem-solving.
+                As an active bug bounty researcher, I&apos;ve successfully reported vulnerabilities through Bugcrowd 
+                including findings for OpenAI. My methodology focuses on ethical disclosure, thorough recon, 
+                and manual testing combined with automated tools to identify IDORs, XSS, and privilege escalation flaws.
               </p>
               <div className="flex gap-4">
                 <div className={`bg-purple-600/20 px-4 py-2 rounded-lg transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`}>
-                  <span className="text-purple-400 font-semibold">50+</span>
-                  <p className="text-sm">Vulnerabilities Found</p>
+                  <span className="text-purple-400 font-semibold">2+</span>
+                  <p className="text-sm">Reported Vulnerabilities</p>
                 </div>
                 <div className={`bg-cyan-600/20 px-4 py-2 rounded-lg transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>
-                  <span className="text-cyan-400 font-semibold">$25K+</span>
-                  <p className="text-sm">Bug Bounty Rewards</p>
+                  <span className="text-cyan-400 font-semibold">92.4%</span>
+                  <p className="text-sm">Current GPA</p>
                 </div>
               </div>
             </div>
             <div className={`bg-gradient-to-br from-purple-600/20 to-cyan-600/20 rounded-2xl p-8 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>
-              <h4 className={`text-xl font-semibold mb-4 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>Certifications & Education</h4>
+              <h4 className={`text-xl font-semibold mb-4 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>Education & Certifications</h4>
               <ul className="space-y-3">
                 <li className={`flex items-center gap-3 transition-all duration-1000 ${isAnimating ? 'animate-ping' : ''}`}>
                   <ChevronRight className={`w-4 h-4 text-purple-400 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`} />
-                  <span>Computer Engineering Degree - University of Toronto</span>
+                  <span>Bachelor&apos;s Engineering - University of Guelph-Humber</span>
                 </li>
                 <li className={`flex items-center gap-3 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>
                   <ChevronRight className={`w-4 h-4 text-purple-400 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`} />
-                  <span>Certified Ethical Hacker (CEH)</span>
+                  <span>Google Cybersecurity Professional Certificate</span>
                 </li>
                 <li className={`flex items-center gap-3 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
                   <ChevronRight className={`w-4 h-4 text-purple-400 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`} />
-                  <span>OSCP - Offensive Security Certified Professional</span>
+                  <span>ISC2 Certified in CyberSecurity (CC)</span>
                 </li>
                 <li className={`flex items-center gap-3 transition-all duration-1000 ${isAnimating ? 'animate-ping' : ''}`}>
                   <ChevronRight className={`w-4 h-4 text-purple-400 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`} />
-                  <span>AWS Security Specialist</span>
+                  <span>CompTIA Security+ (Expected Dec 2025)</span>
+                </li>
+                <li className={`flex items-center gap-3 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>
+                  <ChevronRight className={`w-4 h-4 text-purple-400 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`} />
+                  <span>TryHackMe Cyber-Security 101 Course</span>
                 </li>
               </ul>
             </div>
@@ -414,16 +443,20 @@ export default function Home() {
             Ready to secure your digital assets? Let&apos;s discuss your cybersecurity needs.
           </p>
           
-          <div className="flex justify-center gap-8 mb-12">
-            <a href="mailto:bromskiii@example.com" className={`flex items-center gap-3 bg-purple-600/20 px-6 py-3 rounded-lg hover:bg-purple-600/30 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`}>
+          <div className="flex justify-center gap-6 mb-12 flex-wrap">
+            <a href="tel:+14379740257" className={`flex items-center gap-3 bg-green-600/20 px-6 py-3 rounded-lg hover:bg-green-600/30 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
+              <span className={`w-5 h-5 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>📞</span>
+              Phone
+            </a>
+            <a href="mailto:gurpratap2007@gmail.com" className={`flex items-center gap-3 bg-purple-600/20 px-6 py-3 rounded-lg hover:bg-purple-600/30 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`}>
               <Mail className={`w-5 h-5 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`} />
               Email
             </a>
-            <a href="https://linkedin.com/in/bromskiii" className={`flex items-center gap-3 bg-blue-600/20 px-6 py-3 rounded-lg hover:bg-blue-600/30 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
+            <a href="https://www.linkedin.com/in/gurpratap-smagh" className={`flex items-center gap-3 bg-blue-600/20 px-6 py-3 rounded-lg hover:bg-blue-600/30 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
               <Linkedin className={`w-5 h-5 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`} />
               LinkedIn
             </a>
-            <a href="https://github.com/bromskiii" className={`flex items-center gap-3 bg-gray-600/20 px-6 py-3 rounded-lg hover:bg-gray-600/30 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>
+            <a href="https://github.com/Gurpratap-Smagh/" className={`flex items-center gap-3 bg-gray-600/20 px-6 py-3 rounded-lg hover:bg-gray-600/30 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>
               <Github className={`w-5 h-5 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`} />
               GitHub
             </a>
@@ -434,7 +467,7 @@ export default function Home() {
       {/* Footer */}
       <footer className={`py-8 px-6 border-t border-purple-500/20 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
         <div className="max-w-7xl mx-auto text-center text-gray-400">
-          <p className={`transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>&copy; 2024 Bromskiii. Securing the digital frontier, one vulnerability at a time.</p>
+          <p className={`transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>&copy; 2024 Gurpratap Smagh. Securing the digital frontier, one vulnerability at a time.</p>
         </div>
       </footer>
 
