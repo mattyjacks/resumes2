@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JT Personal Training - Boston's Premier Fitness Coach</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h2>JT FITNESS</h2>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link active" data-page="home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#blog" class="nav-link" data-page="blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#history" class="nav-link" data-page="history">History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#pricing" class="nav-link" data-page="pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link" data-page="contact">Contact</a>
+                    </li>
+                </ul>
+                <div class="nav-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <!-- HOME PAGE -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Transform Your Body, Transform Your Life</h1>
+                        <p>Professional personal training in the heart of Boston. Get fit, stay motivated, and achieve your goals with JT's proven methods.</p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary" onclick="showPage('contact')">Start Your Journey</button>
+                            <button class="btn btn-secondary" onclick="showPage('pricing')">View Packages</button>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://images.pexels.com/photos/416778/pexels-photo-416778.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Personal Trainer JT">
+                    </div>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="container">
+                    <h2>Why Choose JT Fitness?</h2>
+                    <div class="features-grid">
+                        <div class="feature">
+                            <i class="fas fa-dumbbell"></i>
+                            <h3>Personalized Training</h3>
+                            <p>Custom workout plans tailored to your specific goals, fitness level, and lifestyle.</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-heart"></i>
+                            <h3>Holistic Approach</h3>
+                            <p>Combining strength training, cardio, nutrition guidance, and mental wellness.</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-medal"></i>
+                            <h3>Proven Results</h3>
+                            <p>Over 8 years of experience helping Boston residents achieve their fitness goals.</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-clock"></i>
+                            <h3>Flexible Scheduling</h3>
+                            <p>Early morning, lunch break, or evening sessions - we work around your schedule.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonials">
+                <div class="container">
+                    <h2>What Clients Say</h2>
+                    <div class="testimonials-grid">
+                        <div class="testimonial">
+                            <p>"JT helped me lose 30 pounds and gain confidence I never had. His approach is both challenging and supportive."</p>
+                            <div class="testimonial-author">
+                                <strong>Sarah M.</strong>
+                                <span>Back Bay Resident</span>
+                            </div>
+                        </div>
+                        <div class="testimonial">
+                            <p>"After working with JT for 6 months, I completed my first Boston Marathon. His training methods are incredible."</p>
+                            <div class="testimonial-author">
+                                <strong>Mike D.</strong>
+                                <span>Cambridge Professional</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BLOG PAGE -->
+        <section id="blog" class="page">
+            <div class="container">
+                <h1>Fitness Blog</h1>
+                <p class="page-subtitle">Tips, insights, and motivation from JT</p>
+                
+                <div class="blog-grid">
+                    <article class="blog-post">
+                        <img src="https://images.pexels.com/photos/4162451/pexels-photo-4162451.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Kettlebell Training">
+                        <div class="blog-content">
+                            <h2>Master the Kettlebell Swing: Your Path to Total Body Fitness</h2>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-calendar"></i> August 25, 2025</span>
+                                <span><i class="fas fa-user"></i> JT</span>
+                            </div>
+                            <p>The kettlebell swing is arguably one of the most effective exercises you can perform for total body conditioning. This dynamic movement engages your entire posterior chain, including your glutes, hamstrings, and core, while providing an excellent cardiovascular workout.</p>
+                            
+                            <p>When performed correctly, kettlebell swings burn more calories per minute than traditional cardio exercises. The key lies in the hip hinge movement pattern - driving your hips back and explosively thrusting them forward while maintaining a neutral spine. This movement not only builds strength but also improves your power output and athletic performance.</p>
+                            
+                            <p>Start with a moderate weight - typically 15-20 pounds for beginners - and focus on form over speed. Keep your chest up, shoulders back, and let the kettlebell swing naturally to chest height. The power should come from your hips, not your arms. As you progress, you can increase the weight and incorporate variations like single-arm swings or swing-to-squat combinations.</p>
+                            
+                            <p>I recommend incorporating kettlebell swings into your routine 2-3 times per week. Begin with 3 sets of 15-20 swings, resting 60 seconds between sets. As your conditioning improves, you can progress to longer intervals or tabata-style workouts. Remember, consistency and proper form will yield the best results for both strength gains and fat loss.</p>
+                        </div>
+                    </article>
+
+                    <article class="blog-post">
+                        <img src="https://images.pexels.com/photos/2402777/pexels-photo-2402777.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Running in Boston">
+                        <div class="blog-content">
+                            <h2>Running in Boston: From Beginner to Marathon Ready</h2>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-calendar"></i> August 25, 2025</span>
+                                <span><i class="fas fa-user"></i> JT</span>
+                            </div>
+                            <p>Boston is a runner's paradise, offering everything from scenic waterfront paths to challenging hill training opportunities. Whether you're just starting your running journey or preparing for the prestigious Boston Marathon, our city provides the perfect backdrop for achieving your goals.</p>
+                            
+                            <p>For beginners, I always recommend starting with a run-walk program. Begin with 20-minute sessions, alternating between 1-minute runs and 2-minute walks. The Charles River Esplanade is perfect for this, offering flat terrain and beautiful views. Gradually increase your running intervals as your endurance improves, aiming to run continuously for 20-30 minutes within 6-8 weeks.</p>
+                            
+                            <p>Boston's hills are legendary, and for good reason - they're excellent for building strength and speed. Incorporate hill training once per week by running up Beacon Hill or the hills in Franklin Park. These sessions will improve your leg strength, running efficiency, and mental toughness. Start with 4-6 hill repeats, focusing on maintaining good form as you power up each incline.</p>
+                            
+                            <p>Don't forget about recovery and cross-training. Boston's long winters make indoor alternatives essential. Combine your running with strength training, yoga, or swimming at local facilities. Listen to your body and allow adequate rest between hard training sessions. With consistency, proper progression, and the right mindset, you'll be amazed at how quickly your running improves in this inspiring city.</p>
+                        </div>
+                    </article>
+
+                    <article class="blog-post">
+                        <img src="https://images.pexels.com/photos/414029/pexels-photo-414029.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Strength Training in the Gym">
+                        <div class="blog-content">
+                            <h2>Strength Training Basics: Build Muscle the Smart Way</h2>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-calendar"></i> August 25, 2025</span>
+                                <span><i class="fas fa-user"></i> JT</span>
+                            </div>
+                            <p>Strength training is the cornerstone of a balanced fitness program. Whether your goal is fat loss, muscle gain, or improved performance, the principles are the same: progressive overload, proper technique, and consistency. Start with foundational movement patterns—squat, hinge, push, pull, lunge, and carry. These compound exercises recruit multiple muscle groups and build functional strength you can use in everyday life.</p>
+                            <p>For beginners, I recommend training 3 days per week with full-body workouts. Choose 4–6 compound lifts, perform 3 sets of 6–12 reps, and rest 60–90 seconds between sets. Track your weights and aim to increase either the load or reps slightly each week. Focus on form first—neutral spine, stable core, full range of motion. Combine training with adequate protein intake (0.7–1.0 g per pound of body weight), quality sleep, and hydration. In Boston, many gyms around Back Bay and Seaport have great free weight setups—use them well and you’ll see steady, sustainable progress.</p>
+                        </div>
+                    </article>
+
+                    <article class="blog-post">
+                        <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Healthy Meal Prep">
+                        <div class="blog-content">
+                            <h2>Simple Nutrition Wins: Fueling Your Training</h2>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-calendar"></i> August 25, 2025</span>
+                                <span><i class="fas fa-user"></i> JT</span>
+                            </div>
+                            <p>Great training demands great fuel. You don’t need a complicated diet to see results—just consistent, smart choices. Think in terms of plates: half colorful vegetables, a quarter lean protein, and a quarter quality carbs. Add healthy fats like olive oil, nuts, or avocado. Prioritize protein at each meal to support muscle repair and satiety—chicken, eggs, Greek yogurt, tofu, beans, or fish are all excellent options.</p>
+                            <p>For busy Boston schedules, meal prep is your secret weapon. Cook a batch of protein, roast a tray of vegetables, and portion out rice or sweet potatoes on Sundays and Wednesdays. Keep high-protein snacks on hand—string cheese, jerky, protein shakes, or hummus with veggies. Hydrate consistently and aim for 80–90% whole foods. Finally, build in flexibility: enjoy pizza in the North End or a Fenway dog occasionally. One meal won’t derail progress; consistency over time is what matters.</p>
+                        </div>
+                    </article>
+
+                    <article class="blog-post">
+                        <img src="https://images.pexels.com/photos/3763875/pexels-photo-3763875.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Mobility and Stretching">
+                        <div class="blog-content">
+                            <h2>Mobility Matters: Move Better, Feel Better</h2>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-calendar"></i> August 25, 2025</span>
+                                <span><i class="fas fa-user"></i> JT</span>
+                            </div>
+                            <p>Mobility is your foundation for safe, strong training. When joints move freely and muscles coordinate well, you lift more efficiently and recover faster. A simple daily routine can unlock tight hips, improve shoulder health, and reduce nagging aches. Start with 5 minutes: cat-cow for the spine, 90/90 hip switches, thoracic rotations, and ankle rocks. Breathe slowly through each rep and avoid forcing end ranges.</p>
+                            <p>Before workouts, use dynamic movements that mirror your training—world’s greatest stretch, arm circles, leg swings, and glute bridges. After training or on rest days, add longer static stretches for areas that feel tight. Desk workers in Boston often benefit from hip flexor stretches and upper back openers. Remember: mobility isn’t about being bendy; it’s about building usable range of motion and control, so every rep feels smoother and stronger.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- HISTORY PAGE -->
+        <section id="history" class="page">
+            <div class="container">
+                <h1>About JT</h1>
+                <div class="history-content">
+                    <div class="history-image">
+                        <img src="https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=800" alt="JT Personal Trainer">
+                    </div>
+                    <div class="history-text">
+                        <h2>Your Dedicated Fitness Partner</h2>
+                        <p>Hi, I'm JT, and I've been passionate about fitness and helping others achieve their goals for over 8 years. My journey began as a college athlete at Boston University, where I discovered the transformative power of proper training and nutrition.</p>
+                        
+                        <h3>Education & Certifications</h3>
+                        <ul>
+                            <li>Bachelor's in Exercise Science - Boston University</li>
+                            <li>NASM Certified Personal Trainer</li>
+                            <li>Precision Nutrition Level 1 Certified</li>
+                            <li>CPR/AED Certified</li>
+                            <li>Functional Movement Screen Certified</li>
+                        </ul>
+
+                        <h3>My Philosophy</h3>
+                        <p>I believe fitness should be sustainable, enjoyable, and tailored to your unique lifestyle. Every client is different, which is why I create personalized programs that consider not just your goals, but also your schedule, preferences, and any physical limitations.</p>
+
+                        <h3>Specializations</h3>
+                        <ul>
+                            <li>Weight Loss & Body Composition</li>
+                            <li>Strength Training & Muscle Building</li>
+                            <li>Marathon & Running Preparation</li>
+                            <li>Functional Movement & Injury Prevention</li>
+                            <li>Nutrition Coaching</li>
+                        </ul>
+
+                        <p>When I'm not training clients, you can find me exploring Boston's running trails, trying new healthy recipes, or cheering on the Celtics and Patriots. I'm committed to practicing what I preach and staying current with the latest fitness research and techniques.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING PAGE -->
+        <section id="pricing" class="page">
+            <div class="container">
+                <h1>Training Packages</h1>
+                <p class="page-subtitle">Flexible options to fit your schedule and budget</p>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>Single Session</h3>
+                        <div class="price">$80</div>
+                        <ul>
+                            <li>60-minute personal training session</li>
+                            <li>Customized workout plan</li>
+                            <li>Form correction and technique coaching</li>
+                            <li>Nutritional guidance</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="showPage('contact')">Book Now</button>
+                    </div>
+
+                    <div class="pricing-card featured">
+                        <div class="popular-badge">Most Popular</div>
+                        <h3>4-Session Package</h3>
+                        <div class="price">$300</div>
+                        <div class="price-note">Save $20</div>
+                        <ul>
+                            <li>Four 60-minute training sessions</li>
+                            <li>Comprehensive fitness assessment</li>
+                            <li>Personalized workout and nutrition plan</li>
+                            <li>Progress tracking and adjustments</li>
+                            <li>Email support between sessions</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="showPage('contact')">Get Started</button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <h3>8-Session Package</h3>
+                        <div class="price">$560</div>
+                        <div class="price-note">Save $80</div>
+                        <ul>
+                            <li>Eight 60-minute training sessions</li>
+                            <li>Complete body composition analysis</li>
+                            <li>Detailed nutrition and supplement plan</li>
+                            <li>Home workout routines</li>
+                            <li>Unlimited text/email support</li>
+                            <li>Monthly progress photos and measurements</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="showPage('contact')">Transform Now</button>
+                    </div>
+                </div>
+
+                <div class="pricing-info">
+                    <h3>Additional Services</h3>
+                    <div class="additional-services">
+                        <div class="service">
+                            <h4>Nutrition Consultation</h4>
+                            <p>60-minute deep dive into your eating habits with personalized meal planning - $120</p>
+                        </div>
+                        <div class="service">
+                            <h4>Group Training</h4>
+                            <p>Small group sessions (2-4 people) for friends or family - $50 per person</p>
+                        </div>
+                        <div class="service">
+                            <h4>Virtual Training</h4>
+                            <p>Online training sessions via video call - $60 per session</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT PAGE -->
+        <section id="contact" class="page">
+            <div class="container">
+                <h1>Get Started Today</h1>
+                <p class="page-subtitle">Ready to transform your fitness journey? Let's connect!</p>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Phone</strong>
+                                <p>(617) 555-0123</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email</strong>
+                                <p>jt@jtfitness.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Location</strong>
+                                <p>Back Bay, Boston, MA<br>Mobile training available citywide</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Hours</strong>
+                                <p>Monday - Friday: 6:00 AM - 8:00 PM<br>
+                                Saturday: 7:00 AM - 6:00 PM<br>
+                                Sunday: 8:00 AM - 5:00 PM</p>
+                            </div>
+                        </div>
+
+                        <div class="social-links">
+                            <h4>Follow Me</h4>
+                            <div class="social-icons">
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-facebook"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-container">
+                        <h3>Send a Message</h3>
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" required>
+                                <label for="name">Full Name</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" required>
+                                <label for="email">Email Address</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="phone" name="phone">
+                                <label for="phone">Phone Number</label>
+                            </div>
+                            <div class="form-group">
+                                <select id="service" name="service" required>
+                                    <option value="">Select a Service</option>
+                                    <option value="personal-training">Personal Training</option>
+                                    <option value="nutrition">Nutrition Consultation</option>
+                                    <option value="group-training">Group Training</option>
+                                    <option value="virtual-training">Virtual Training</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <label for="service">Service Interest</label>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                                <label for="message">Tell me about your fitness goals</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="location-image">
+                    <img src="https://images.pexels.com/photos/2467558/pexels-photo-2467558.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Boston Skyline">
+                    <div class="location-overlay">
+                        <h3>Training in Beautiful Boston</h3>
+                        <p>From the Charles River Esplanade to Boston Common, we'll make the city your gym.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRIVACY POLICY PAGE -->
+        <section id="privacy" class="page">
+            <div class="container">
+                <h1>Privacy Policy</h1>
+                <div class="privacy-content">
+                    <p><strong>Effective Date:</strong> August 25, 2024</p>
+                    
+                    <h3>Information We Collect</h3>
+                    <p>JT Fitness collects information you provide directly to us, such as when you contact us for training services, subscribe to our newsletter, or communicate with us. This may include your name, email address, phone number, fitness goals, and health information relevant to your training.</p>
+
+                    <h3>How We Use Your Information</h3>
+                    <p>We use the information we collect to:</p>
+                    <ul>
+                        <li>Provide personalized fitness training services</li>
+                        <li>Communicate with you about your training programs</li>
+                        <li>Send you fitness tips and updates (with your consent)</li>
+                        <li>Improve our services and website</li>
+                        <li>Comply with legal obligations</li>
+                    </ul>
+
+                    <h3>Information Sharing</h3>
+                    <p>We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this policy. We may share information with healthcare providers if necessary for your safety during training sessions.</p>
+
+                    <h3>Data Security</h3>
+                    <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet is 100% secure.</p>
+
+                    <h3>Your Rights</h3>
+                    <p>You have the right to:</p>
+                    <ul>
+                        <li>Access your personal information</li>
+                        <li>Correct inaccurate information</li>
+                        <li>Request deletion of your information</li>
+                        <li>Opt-out of marketing communications</li>
+                    </ul>
+
+                    <h3>Contact Us</h3>
+                    <p>If you have questions about this Privacy Policy, please contact us at:</p>
+                    <p>Email: jt@jtfitness.com<br>
+                    Phone: (617) 555-0123</p>
+
+                    <p><em>This policy may be updated from time to time. We will notify you of any significant changes.</em></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>JT FITNESS</h3>
+                    <p>Transform your body, transform your life. Professional personal training in Boston, MA.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home" onclick="showPage('home')">Home</a></li>
+                        <li><a href="#blog" onclick="showPage('blog')">Blog</a></li>
+                        <li><a href="#history" onclick="showPage('history')">About</a></li>
+                        <li><a href="#pricing" onclick="showPage('pricing')">Pricing</a></li>
+                        <li><a href="#contact" onclick="showPage('contact')">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> (617) 555-0123</p>
+                    <p><i class="fas fa-envelope"></i> jt@jtfitness.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Boston, MA</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#privacy" onclick="showPage('privacy')">Privacy Policy</a></li>
+                        <li><a href="#" onclick="showPage('contact')">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 JT Fitness. All rights reserved. | Boston, Massachusetts</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
