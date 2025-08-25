@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Shield, Bug, Code, Globe, ChevronRight, ExternalLink, Github, Linkedin, Mail, Sparkles } from "lucide-react";
+import { Shield, Bug, Code, Globe, ChevronRight, ExternalLink, Github, Linkedin, Mail, Sparkles, MessageCircle } from "lucide-react";
+
+type AnimationChoice = 'random' | 'magical' | 'fire' | 'water' | 'matrix' | 'cosmic';
 
 export default function Home() {
   const [currentProject, setCurrentProject] = useState(0);
@@ -68,19 +70,34 @@ export default function Home() {
   ];
 
   const animationStyles = ['magical', 'fire', 'water', 'matrix', 'cosmic'] as const;
+  const [preferredStyle, setPreferredStyle] = useState<AnimationChoice>('random');
+
+  const getStyleGlow = () => {
+    if (!isAnimating) return '';
+    switch (animationStyle) {
+      case 'magical': return 'glow-magical';
+      case 'fire': return 'glow-fire';
+      case 'water': return 'glow-water';
+      case 'matrix': return 'glow-matrix';
+      case 'cosmic': return 'glow-cosmic';
+      default: return '';
+    }
+  };
 
   const handleMagicalAnimation = () => {
     if (isAnimating) return; // Prevent multiple animations
     
-    // Randomly select animation style
-    const randomStyle = animationStyles[Math.floor(Math.random() * animationStyles.length)];
-    setAnimationStyle(randomStyle);
+    // Choose animation style (preferred or random)
+    const chosenStyle = preferredStyle === 'random'
+      ? animationStyles[Math.floor(Math.random() * animationStyles.length)]
+      : preferredStyle;
+    setAnimationStyle(chosenStyle);
     setIsAnimating(true);
     
     // Create particles based on animation style
     let newParticles: Array<{id: number, x: number, y: number, type?: string}> = [];
     
-    switch (randomStyle) {
+    switch (chosenStyle) {
       case 'magical':
         newParticles = Array.from({ length: 50 }, (_, i) => ({
           id: i,
@@ -125,11 +142,11 @@ export default function Home() {
     
     setParticles(newParticles);
 
-    // Stop animation after 10 seconds and return smoothly
+    // Stop animation after 5 seconds and return smoothly
     setTimeout(() => {
       setIsAnimating(false);
       setParticles([]);
-    }, 10000);
+    }, 5000);
   };
 
   useEffect(() => {
@@ -219,6 +236,14 @@ export default function Home() {
             <a href="#about" className="hover:text-purple-400 transition-colors">About</a>
             <a href="#projects" className="hover:text-purple-400 transition-colors">Projects</a>
             <a href="#contact" className="hover:text-purple-400 transition-colors">Contact</a>
+            <a
+              href="https://api.whatsapp.com/send?phone=14379740257&text=Hey%2C%20Gurpratap%21"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 ${getStyleGlow()}`}
+            >
+              <MessageCircle className="w-4 h-4" /> WhatsApp
+            </a>
           </div>
         </div>
       </nav>
@@ -249,7 +274,7 @@ export default function Home() {
                 animationStyle === 'matrix' ? 'animate-bounce' :
                 'animate-spin'
               ) : ''
-            }`}>
+            } ${getStyleGlow()}`}>
               View Projects
             </button>
             <button className={`border border-purple-400 px-8 py-3 rounded-lg font-semibold hover:bg-purple-400/10 transition-all duration-500 ${
@@ -260,12 +285,38 @@ export default function Home() {
                 animationStyle === 'matrix' ? 'animate-pulse' :
                 'animate-bounce'
               ) : ''
-            }`}>
+            } ${getStyleGlow()}`}>
               Download CV
             </button>
+            <a
+              href="https://api.whatsapp.com/send?phone=14379740257&text=Hey%2C%20Gurpratap%21"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center gap-3 bg-emerald-600/20 px-8 py-3 rounded-lg font-semibold hover:bg-emerald-600/30 transition-all duration-500 ${isAnimating ? 'animate-pulse' : 'animate-float'} ${getStyleGlow()}`}
+            >
+              <MessageCircle className={`w-5 h-5 ${isAnimating ? 'animate-bounce' : ''}`} />
+              WhatsApp Me
+            </a>
           </div>
 
-          {/* Animate Button - Own Row */}
+          {/* Style Picker + Animate Button Row */}
+          <div className="flex flex-col items-center gap-4 mb-4">
+            <div className="flex items-center gap-3 text-sm text-gray-300">
+              <span>Animation style:</span>
+              <select
+                value={preferredStyle}
+                onChange={(e) => setPreferredStyle(e.currentTarget.value as AnimationChoice)}
+                className="bg-white/10 border border-white/20 rounded px-3 py-2"
+              >
+                <option value="random">Random</option>
+                <option value="magical">Magical</option>
+                <option value="fire">Fire</option>
+                <option value="water">Water</option>
+                <option value="matrix">Matrix</option>
+                <option value="cosmic">Cosmic</option>
+              </select>
+            </div>
+          </div>
           <div className="flex justify-center mb-12">
             <button 
               onClick={handleMagicalAnimation}
@@ -280,7 +331,7 @@ export default function Home() {
                       'bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-500'
                     }`
                   : 'bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500'
-              } ${isAnimating ? 'cursor-not-allowed opacity-75' : 'cursor-pointer'}`}
+              } ${isAnimating ? 'cursor-not-allowed opacity-75' : 'cursor-pointer'} ${getStyleGlow()}`}
             >
               <div className="flex items-center gap-4">
                 <Sparkles className={`w-8 h-8 ${isAnimating ? 'animate-spin' : ''}`} />
@@ -400,15 +451,11 @@ export default function Home() {
                     <h3 className={`text-2xl font-bold mb-2 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>{project.title}</h3>
                     <p className={`text-purple-300 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>{project.category}</p>
                   </div>
-                  <div className="absolute top-4 right-4">
-                    <ExternalLink className={`w-5 h-5 text-purple-400 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`} />
-                  </div>
                 </div>
-                
-                <div className="p-6">
+                {/* Card Content */}
+                <div className={`p-6 ${getStyleGlow()}`}>
                   <h4 className={`text-xl font-semibold mb-2 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>{project.description}</h4>
                   <p className={`text-gray-400 text-sm mb-4 line-clamp-3 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>{project.details}</p>
-                  
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tech.slice(0, 3).map((tech, techIndex) => (
                       <span key={techIndex} className={`bg-purple-600/20 text-purple-300 px-2 py-1 rounded text-xs transition-all duration-1000 ${isAnimating ? 'animate-ping' : ''}`}>
@@ -419,7 +466,6 @@ export default function Home() {
                       <span className={`text-gray-400 text-xs transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>+{project.tech.length - 3} more</span>
                     )}
                   </div>
-                  
                   <a 
                     href={project.url} 
                     target="_blank" 
@@ -428,6 +474,14 @@ export default function Home() {
                   >
                     View Live Site <ExternalLink className={`w-4 h-4 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`} />
                   </a>
+                  <a
+                    href="https://api.whatsapp.com/send?phone=14379740257&text=Hey%2C%20Gurpratap%21"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`ml-4 inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 ${isAnimating ? 'animate-pulse' : ''}`}
+                  >
+                    <MessageCircle className="w-4 h-4" /> Ask on WhatsApp
+                  </a>
                 </div>
               </div>
             ))}
@@ -435,55 +489,101 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className={`py-20 px-6 bg-black/20 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className={`text-4xl font-bold mb-8 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>Let&apos;s Connect</h2>
-          <p className={`text-xl text-gray-300 mb-12 transition-all duration-1000 ${isAnimating ? 'animate-ping' : ''}`}>
-            Ready to secure your digital assets? Let&apos;s discuss your cybersecurity needs.
-          </p>
-          
-          <div className="flex justify-center gap-6 mb-12 flex-wrap">
-            <a href="tel:+14379740257" className={`flex items-center gap-3 bg-green-600/20 px-6 py-3 rounded-lg hover:bg-green-600/30 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
-              <span className={`w-5 h-5 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>📞</span>
-              Phone
-            </a>
-            <a href="mailto:gurpratap2007@gmail.com" className={`flex items-center gap-3 bg-purple-600/20 px-6 py-3 rounded-lg hover:bg-purple-600/30 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`}>
-              <Mail className={`w-5 h-5 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`} />
-              Email
-            </a>
-            <a href="https://www.linkedin.com/in/gurpratap-smagh" className={`flex items-center gap-3 bg-blue-600/20 px-6 py-3 rounded-lg hover:bg-blue-600/30 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
-              <Linkedin className={`w-5 h-5 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`} />
-              LinkedIn
-            </a>
-            <a href="https://github.com/Gurpratap-Smagh/" className={`flex items-center gap-3 bg-gray-600/20 px-6 py-3 rounded-lg hover:bg-gray-600/30 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>
-              <Github className={`w-5 h-5 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`} />
-              GitHub
-            </a>
-          </div>
-        </div>
-      </section>
+{/* Contact Section */}
+<section id="contact" className={`py-20 px-6 bg-black/20 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
+  <div className="max-w-4xl mx-auto text-center">
+    <h2 className={`text-4xl font-bold mb-8 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>Let&apos;s Connect</h2>
+    <p className={`text-xl text-gray-300 mb-12 transition-all duration-1000 ${isAnimating ? 'animate-ping' : ''}`}>
+      Ready to secure your digital assets? Let&apos;s discuss your cybersecurity needs.
+    </p>
+    
+    <div className="flex justify-center gap-6 mb-12 flex-wrap">
+      <a href="tel:+14379740257" className={`flex items-center gap-3 bg-green-600/20 px-6 py-3 rounded-lg hover:bg-green-600/30 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : 'animate-float'}`}>
+        <span className={`w-5 h-5 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>📞</span>
+        Phone
+      </a>
+      <a
+        href="https://api.whatsapp.com/send?phone=14379740257&text=Hey%2C%20Gurpratap%21"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`flex items-center gap-3 bg-emerald-600/20 px-6 py-3 rounded-lg hover:bg-emerald-600/30 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : 'animate-float'}`}
+      >
+        <MessageCircle className={`w-5 h-5 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`} />
+        Message me on WhatsApp
+      </a>
+      <a href="mailto:gurpratap2007@gmail.com" className={`flex items-center gap-3 bg-purple-600/20 px-6 py-3 rounded-lg hover:bg-purple-600/30 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`}>
+        <Mail className={`w-5 h-5 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`} />
+        Email
+      </a>
+      <a href="https://www.linkedin.com/in/gurpratap-smagh" className={`flex items-center gap-3 bg-blue-600/20 px-6 py-3 rounded-lg hover:bg-blue-600/30 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
+        <Linkedin className={`w-5 h-5 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`} />
+        LinkedIn
+      </a>
+      <a href="https://github.com/Gurpratap-Smagh/" className={`flex items-center gap-3 bg-gray-600/20 px-6 py-3 rounded-lg hover:bg-gray-600/30 transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>
+        <Github className={`w-5 h-5 transition-all duration-1000 ${isAnimating ? 'animate-spin' : ''}`} />
+        GitHub
+      </a>
+    </div>
 
-      {/* Footer */}
-      <footer className={`py-8 px-6 border-t border-purple-500/20 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
-        <div className="max-w-7xl mx-auto text-center text-gray-400">
-          <p className={`transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>&copy; 2024 Gurpratap Smagh. Securing the digital frontier, one vulnerability at a time.</p>
-        </div>
-      </footer>
+    {/* Floating WhatsApp Button */}
+    <a
+      href="https://api.whatsapp.com/send?phone=14379740257&text=Hey%2C%20Gurpratap%21"
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`fixed bottom-6 right-6 z-50 bg-emerald-600 text-white rounded-full shadow-lg px-5 py-4 hover:bg-emerald-500 transition ${isAnimating ? 'animate-pulse' : 'animate-float'} ${getStyleGlow()}`}
+      aria-label="Message me on WhatsApp"
+    >
+      <div className="flex items-center gap-2">
+        <MessageCircle className="w-6 h-6" />
+        <span className="hidden md:inline">WhatsApp</span>
+      </div>
+    </a>
+  </div>
+</section>
 
-      <style jsx global>{`
-        /* Remove global body animations - animate only individual elements */
-        
-        /* Smooth transitions for individual elements only */
-        .transition-all {
-          transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        }
-        
-        /* Enhanced button hover effects */
-        .hover\\:shadow-3xl:hover {
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 30px rgba(255, 255, 255, 0.1);
-        }
-      `}</style>
-    </main>
-  );
+{/* Footer */}
+<footer className={`py-8 px-6 border-t border-purple-500/20 transition-all duration-1000 ${isAnimating ? 'animate-pulse' : ''}`}>
+  <div className="max-w-7xl mx-auto text-center text-gray-400">
+    <p className={`transition-all duration-1000 ${isAnimating ? 'animate-bounce' : ''}`}>&copy; 2024 Gurpratap Smagh. Securing the digital frontier, one vulnerability at a time.</p>
+  </div>
+</footer>
+
+<style jsx global>{`
+  /* Remove global body animations - animate only individual elements */
+  
+  /* Smooth transitions for individual elements only */
+  .transition-all {
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  /* Subtle float animation for CTAs */
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+  }
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  /* Per-style glow helpers */
+  .glow-magical { box-shadow: 0 0 0 0 rgba(0,0,0,0), 0 0 18px rgba(192, 132, 252, 0.45), 0 0 36px rgba(34, 211, 238, 0.25); }
+  .glow-fire { box-shadow: 0 0 0 0 rgba(0,0,0,0), 0 0 18px rgba(251, 146, 60, 0.5), 0 0 36px rgba(234, 179, 8, 0.25); }
+  .glow-water { box-shadow: 0 0 0 0 rgba(0,0,0,0), 0 0 18px rgba(56, 189, 248, 0.45), 0 0 36px rgba(45, 212, 191, 0.25); }
+  .glow-matrix { box-shadow: 0 0 0 0 rgba(0,0,0,0), 0 0 18px rgba(74, 222, 128, 0.45), 0 0 36px rgba(34, 197, 94, 0.25); }
+  .glow-cosmic { box-shadow: 0 0 0 0 rgba(0,0,0,0), 0 0 18px rgba(168, 85, 247, 0.45), 0 0 36px rgba(236, 72, 153, 0.25); }
+  /* Enhanced button hover effects */
+  .hover\:shadow-3xl:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 30px rgba(255, 255, 255, 0.1);
+  }
+`}</style>
+ </main>
+ );
 }
