@@ -1,0 +1,245 @@
+// Smooth scrolling for navigation links
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scrolling
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Active navigation highlighting
+    const sections = document.querySelectorAll('.section');
+    const navItems = document.querySelectorAll('.nav-link');
+
+    function highlightNavigation() {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (window.pageYOffset >= (sectionTop - 200)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('href') === `#${current}`) {
+                item.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', highlightNavigation);
+
+    // Intersection Observer for animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+
+    // Observe all animated elements
+    const animatedElements = document.querySelectorAll('.timeline-item, .education-card, .skill-card, .language-card');
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
+
+    // Typing animation for the name
+    const nameTitle = document.querySelector('.name-title');
+    const originalText = nameTitle.textContent;
+    nameTitle.textContent = '';
+    
+    function typeWriter(text, element, speed = 100) {
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            }
+        }
+        type();
+    }
+
+    // Start typing animation after a short delay
+    setTimeout(() => {
+        typeWriter(originalText, nameTitle, 80);
+    }, 1000);
+
+    // Parallax effect for floating stars
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const stars = document.querySelectorAll('.floating-star');
+        
+        stars.forEach((star, index) => {
+            const speed = 0.5 + (index * 0.2);
+            star.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+        });
+    });
+
+    // Interactive skill cards
+    const skillCards = document.querySelectorAll('.skill-card');
+    skillCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) rotate(2deg) scale(1.05)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) rotate(0deg) scale(1)';
+        });
+    });
+
+    // Animated counter for proficiency bars
+    function animateProgressBars() {
+        const progressBars = document.querySelectorAll('.proficiency-fill');
+        progressBars.forEach(bar => {
+            const targetWidth = bar.style.width;
+            bar.style.width = '0%';
+            
+            setTimeout(() => {
+                bar.style.transition = 'width 2s ease-out';
+                bar.style.width = targetWidth;
+            }, 500);
+        });
+    }
+
+    // Trigger progress bar animation when languages section is visible
+    const languagesSection = document.querySelector('.languages-section');
+    const languagesObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateProgressBars();
+                languagesObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    if (languagesSection) {
+        languagesObserver.observe(languagesSection);
+    }
+
+    // Add sparkle effect on hover for contact items
+    const contactItems = document.querySelectorAll('.contact-item');
+    contactItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            createSparkle(this);
+        });
+    });
+
+    function createSparkle(element) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.cssText = `
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #fcd116;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleAnim 1s ease-out forwards;
+            top: ${Math.random() * 100}%;
+            left: ${Math.random() * 100}%;
+        `;
+        
+        element.style.position = 'relative';
+        element.appendChild(sparkle);
+        
+        setTimeout(() => {
+            sparkle.remove();
+        }, 1000);
+    }
+
+    // Add sparkle animation to CSS
+    const sparkleStyle = document.createElement('style');
+    sparkleStyle.textContent = `
+        @keyframes sparkleAnim {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1) rotate(180deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .nav-link.active {
+            color: #ce1126 !important;
+            font-weight: 600;
+        }
+        
+        .nav-link.active::after {
+            width: 80% !important;
+        }
+    `;
+    document.head.appendChild(sparkleStyle);
+
+    // Add floating animation to timeline markers
+    const timelineMarkers = document.querySelectorAll('.timeline-marker');
+    timelineMarkers.forEach((marker, index) => {
+        marker.style.animation = `float 3s ease-in-out infinite ${index * 0.5}s`;
+    });
+
+    // Easter egg: Philippine flag colors on scroll
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        document.body.style.background = 'linear-gradient(45deg, #f0f8ff, #fff0f8)';
+        
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            document.body.style.background = 'linear-gradient(45deg, #f8f9ff, #fff8f0)';
+        }, 150);
+    });
+
+    // Add click effect to timeline items
+    const timelineItems = document.querySelectorAll('.timeline-content');
+    timelineItems.forEach(item => {
+        item.addEventListener('click', function() {
+            this.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+        });
+    });
+
+    // Preload animations
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 500);
+});
+
+// Add loaded class styles
+const loadedStyle = document.createElement('style');
+loadedStyle.textContent = `
+    body:not(.loaded) * {
+        animation-play-state: paused !important;
+    }
+    
+    .loaded * {
+        animation-play-state: running !important;
+    }
+`;
+document.head.appendChild(loadedStyle);
