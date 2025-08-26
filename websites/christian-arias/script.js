@@ -26,10 +26,10 @@ function initializeNavbarEffects() {
     // Change navbar style on scroll
     window.addEventListener('scroll', function() {
         if (window.scrollY > 100) {
-            navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-            navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            navbar.style.background = 'rgba(255, 255, 255, 0.96)';
+            navbar.style.boxShadow = '0 6px 18px rgba(0,0,0,0.06)';
         } else {
-            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            navbar.style.background = 'rgba(255, 255, 255, 0.92)';
             navbar.style.boxShadow = 'none';
         }
     });
@@ -81,18 +81,15 @@ function initializeScrollAnimations() {
                 if (entry.target.classList.contains('tech-skills')) {
                     animateSkillBars();
                 }
-                
-                // Special animation for cards
+                // Subtle reveal on sections with cards
                 if (entry.target.classList.contains('about-grid')) {
-                    animateCards(entry.target, '.about-card');
+                    animateCards(entry.target, '.about-card', 120);
                 }
-                
                 if (entry.target.classList.contains('timeline')) {
-                    animateCards(entry.target, '.timeline-card', 200);
+                    animateCards(entry.target, '.timeline-card', 150);
                 }
-                
                 if (entry.target.classList.contains('cert-grid')) {
-                    animateCards(entry.target, '.cert-item', 100);
+                    animateCards(entry.target, '.cert-item', 120);
                 }
             }
         });
@@ -148,19 +145,6 @@ function initializeSkillBars() {
             color: var(--ph-red) !important;
             font-weight: 600;
         }
-        
-        .floating-element {
-            animation: floatUpDown 3s ease-in-out infinite;
-        }
-        
-        @keyframes floatUpDown {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
     `;
     document.head.appendChild(style);
 }
@@ -182,83 +166,6 @@ function animateSkillBars() {
 
 // Interactive elements and hover effects
 function initializeInteractiveElements() {
-    // Add floating animation to profile card
-    const profileCard = document.querySelector('.profile-card');
-    if (profileCard) {
-        profileCard.classList.add('floating-element');
-    }
-    
-    // Interactive button effects
-    const buttons = document.querySelectorAll('.btn');
-    buttons.forEach(button => {
-        button.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-3px) scale(1.05)';
-        });
-        
-        button.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-        
-        button.addEventListener('click', function(e) {
-            // Ripple effect
-            const ripple = document.createElement('span');
-            const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
-            
-            ripple.style.width = ripple.style.height = size + 'px';
-            ripple.style.left = x + 'px';
-            ripple.style.top = y + 'px';
-            ripple.classList.add('ripple');
-            
-            this.appendChild(ripple);
-            
-            setTimeout(() => {
-                ripple.remove();
-            }, 600);
-        });
-    });
-    
-    // Card hover effects with enhanced animations
-    const cards = document.querySelectorAll('.about-card, .timeline-card, .contact-card, .cert-item');
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px) scale(1.02)';
-            this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.15)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-            this.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
-        });
-    });
-    
-    // Skill item hover effects
-    const skillItems = document.querySelectorAll('.skill-item');
-    skillItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateX(15px) scale(1.02)';
-            this.style.backgroundColor = '#f8f9ff';
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateX(0) scale(1)';
-            this.style.backgroundColor = 'white';
-        });
-    });
-    
-    // Add parallax effect to hero section
-    const hero = document.querySelector('.hero');
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const parallaxSpeed = 0.5;
-        
-        if (hero) {
-            hero.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
-        }
-    });
-    
     // Copy contact info on click
     const contactDetails = document.querySelectorAll('.contact-details p');
     contactDetails.forEach(detail => {
@@ -282,51 +189,25 @@ function initializeInteractiveElements() {
         }
     });
     
-    // Enhanced Philippines flag animation
+    // Subtle Philippines flag hover
     const flags = document.querySelectorAll('.philippines-flag');
     flags.forEach(flag => {
         let hoverTimeout;
         
         flag.addEventListener('mouseenter', function() {
             clearTimeout(hoverTimeout);
-            this.style.animation = 'none';
-            this.style.transform = 'scale(1.2) rotate(10deg)';
+            this.style.transform = 'scale(1.05)';
         });
         
         flag.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1) rotate(0deg)';
+            this.style.transform = 'scale(1)';
             hoverTimeout = setTimeout(() => {
-                this.style.animation = 'wave 2s ease-in-out infinite';
+                // restore any default animations if defined in CSS
+                this.style.animation = '';
             }, 300);
         });
     });
 }
-
-// Add ripple effect CSS
-const rippleStyle = document.createElement('style');
-rippleStyle.textContent = `
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.6);
-        transform: scale(0);
-        animation: rippleEffect 0.6s linear;
-        pointer-events: none;
-    }
-    
-    @keyframes rippleEffect {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
-    
-    .btn {
-        position: relative;
-        overflow: hidden;
-    }
-`;
-document.head.appendChild(rippleStyle);
 
 // Performance optimization: Throttle scroll events
 function throttle(func, wait) {
