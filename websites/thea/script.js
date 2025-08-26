@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         .nav-link.active {
-            color: #ce1126 !important;
+            color: #ED3500 !important;
             font-weight: 600;
         }
         
@@ -185,11 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(sparkleStyle);
 
-    // Add floating animation to timeline markers
-    const timelineMarkers = document.querySelectorAll('.timeline-marker');
-    timelineMarkers.forEach((marker, index) => {
-        marker.style.animation = `float 3s ease-in-out infinite ${index * 0.5}s`;
-    });
+    // Keep timeline markers static (no animation)
 
     // Removed background flicker on scroll to ensure stable visuals
 
