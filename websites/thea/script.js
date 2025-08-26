@@ -85,16 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
         typeWriter(originalText, nameTitle, 80);
     }, 1000);
 
-    // Parallax effect for floating stars
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const stars = document.querySelectorAll('.floating-star');
-        
-        stars.forEach((star, index) => {
-            const speed = 0.5 + (index * 0.2);
-            star.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
-        });
-    });
+    // Removed parallax scroll to prevent animation glitches on some devices
 
     // Interactive skill cards
     const skillCards = document.querySelectorAll('.skill-card');
@@ -108,34 +99,31 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Animated counter for proficiency bars
-    function animateProgressBars() {
-        const progressBars = document.querySelectorAll('.proficiency-fill');
-        progressBars.forEach(bar => {
-            const targetWidth = bar.style.width;
+    // Animated fill for proficiency bars (skills and languages)
+    function animateBarsIn(container) {
+        const bars = container.querySelectorAll('.proficiency-fill');
+        bars.forEach(bar => {
+            const target = bar.getAttribute('style')?.match(/width:\s*([0-9.]+%)/);
+            const targetWidth = target ? target[1] : '100%';
             bar.style.width = '0%';
-            
-            setTimeout(() => {
+            requestAnimationFrame(() => {
                 bar.style.transition = 'width 2s ease-out';
                 bar.style.width = targetWidth;
-            }, 500);
+            });
         });
     }
 
-    // Trigger progress bar animation when languages section is visible
-    const languagesSection = document.querySelector('.languages-section');
-    const languagesObserver = new IntersectionObserver(function(entries) {
+    const barSections = document.querySelectorAll('.languages-section, .expertise-section');
+    const barsObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                animateProgressBars();
-                languagesObserver.unobserve(entry.target);
+                animateBarsIn(entry.target);
+                barsObserver.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.3 });
 
-    if (languagesSection) {
-        languagesObserver.observe(languagesSection);
-    }
+    barSections.forEach(sec => barsObserver.observe(sec));
 
     // Add sparkle effect on hover for contact items
     const contactItems = document.querySelectorAll('.contact-item');
@@ -203,16 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
         marker.style.animation = `float 3s ease-in-out infinite ${index * 0.5}s`;
     });
 
-    // Easter egg: Philippine flag colors on scroll
-    let scrollTimeout;
-    window.addEventListener('scroll', function() {
-        document.body.style.background = 'linear-gradient(45deg, #f0f8ff, #fff0f8)';
-        
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-            document.body.style.background = 'linear-gradient(45deg, #f8f9ff, #fff8f0)';
-        }, 150);
-    });
+    // Removed background flicker on scroll to ensure stable visuals
 
     // Add click effect to timeline items
     const timelineItems = document.querySelectorAll('.timeline-content');
